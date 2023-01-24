@@ -32,4 +32,8 @@ public class SpigotImpl extends JavaPlugin {
     public Metrics getMetrics() {
         return metrics;
     }
+
+    public void callCompletionEvent() {
+
+    }
 }

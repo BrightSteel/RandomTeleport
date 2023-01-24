@@ -4,6 +4,7 @@ import me.darkeyedragon.randomtp.api.addon.AddonPlugin;
 import me.darkeyedragon.randomtp.api.addon.RandomAddonManager;
 import me.darkeyedragon.randomtp.api.config.RandomConfigHandler;
 import me.darkeyedragon.randomtp.api.eco.EcoHandler;
+import me.darkeyedragon.randomtp.api.event.RandomTeleportCompletionEvent;
 import me.darkeyedragon.randomtp.api.failsafe.DeathTracker;
 import me.darkeyedragon.randomtp.api.logging.PluginLogger;
 import me.darkeyedragon.randomtp.api.message.MessageHandler;
@@ -66,4 +67,6 @@ public interface RandomTeleportPlugin<T> {
     boolean hasConsent();
 
     Platform getPlatform();
+
+    RandomTeleportCompletionEvent getCompletionEvent();
 }

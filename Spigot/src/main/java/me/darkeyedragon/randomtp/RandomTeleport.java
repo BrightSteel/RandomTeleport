@@ -5,6 +5,8 @@ import me.darkeyedragon.randomtp.addon.SpigotAddonPlugin;
 import me.darkeyedragon.randomtp.api.addon.AddonPlugin;
 import me.darkeyedragon.randomtp.api.config.RandomConfigHandler;
 import me.darkeyedragon.randomtp.api.eco.EcoHandler;
+import me.darkeyedragon.randomtp.api.event.RandomEvent;
+import me.darkeyedragon.randomtp.api.event.RandomTeleportCompletionEvent;
 import me.darkeyedragon.randomtp.api.failsafe.DeathTracker;
 import me.darkeyedragon.randomtp.api.logging.PluginLogger;
 import me.darkeyedragon.randomtp.api.message.MessageHandler;
@@ -38,6 +40,7 @@ import me.darkeyedragon.randomtp.listener.WorldBorderChangeListener;
 import me.darkeyedragon.randomtp.listener.WorldListener;
 import me.darkeyedragon.randomtp.log.BukkitLogger;
 import me.darkeyedragon.randomtp.scheduler.SpigotScheduler;
+import me.darkeyedragon.randomtp.teleport.SpigotCompletionEvent;
 import me.darkeyedragon.randomtp.world.SpigotBiomeHandler;
 import me.darkeyedragon.randomtp.world.SpigotMaterialHandler;
 import me.darkeyedragon.randomtp.world.SpigotPlayerHandler;
@@ -76,6 +79,8 @@ public final class RandomTeleport extends RandomTeleportPluginImpl {
     private PluginManager pluginManager;
     private MessageHandler messageHandler;
     private Platform platform;
+
+    public RandomTeleportCompletionEvent completionEvent;
 
     public RandomTeleport(SpigotImpl plugin) {
         this.plugin = plugin;
@@ -145,6 +150,9 @@ public final class RandomTeleport extends RandomTeleportPluginImpl {
         WorldHandler.registerLocationSearcher(RandomEnvironment.NETHER, new NetherLocationSearcher(this));
         WorldHandler.registerLocationSearcher(RandomEnvironment.THE_END, new EndLocationSearcher(this));
         registerListeners();
+
+        this.completionEvent = new SpigotCompletionEvent();
+
     }
 
     private void registerListeners() {
@@ -174,6 +182,11 @@ public final class RandomTeleport extends RandomTeleportPluginImpl {
     @Override
     public Platform getPlatform() {
         return Platform.of("bukkit", Bukkit.getVersion(), Bukkit.getName(), Bukkit.getBukkitVersion());
+    }
+
+    @Override
+    public RandomTeleportCompletionEvent getCompletionEvent() {
+        return completionEvent;
     }
 
     public SpigotImpl getPlugin() {

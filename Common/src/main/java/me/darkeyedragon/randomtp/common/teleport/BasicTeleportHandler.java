@@ -157,6 +157,7 @@ public class BasicTeleportHandler implements TeleportHandler {
         if (plugin.hasConsent()) {
             plugin.getStats().addTeleportStat();
         }
+        plugin.getCompletionEvent().call(player, property);
         //TODO implement event pipeline
             /*RandomTeleportCompletedEvent event = new RandomTeleportCompletedEvent(player, property);
             Bukkit.getServer().getPluginManager().callEvent(event);*/
